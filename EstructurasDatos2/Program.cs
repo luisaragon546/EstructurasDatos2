@@ -10,22 +10,24 @@ namespace EstructurasDatos2
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World");
+			Console.WriteLine("Menu");
+			int opt = 0;
 
-			Stack stack = new Stack();
+			do
+			{
+				Console.WriteLine("What do you want to do?");
+				Console.WriteLine("1. Stack");
+				Console.WriteLine("9. Exit"); ;
+				opt = Convert.ToInt16(Console.ReadLine());
 
-			stack.Push(4);
-			stack.Push(7);
-			stack.Push(1);
-			stack.Push(9);
+				if (opt == 1)
+				{
+					StackFactory stackFactory = new StackFactory();
+					stackFactory.Start();
+				}
 
-			stack.Print();
 
-			stack.Pop();
-
-			stack.Print();
-
-			Console.ReadLine();
+			} while(opt != 9);
 		}
 	}
 }
