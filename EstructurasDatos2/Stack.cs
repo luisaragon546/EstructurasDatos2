@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EstructurasDatos2
 {
-	public class StackFactory
+	internal class StackFactory
 	{
 		public void Start()
 		{

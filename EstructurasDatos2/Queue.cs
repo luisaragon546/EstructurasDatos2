@@ -49,6 +49,18 @@ namespace EstructurasDatos2
 					}					
 				}
 
+				if (opt == 3)
+				{
+					queue.Print();
+				}
+
+				if (opt == 4)
+				{
+					Console.WriteLine("What are you looking for?");
+					string name = Console.ReadLine();
+					queue.Find(name);
+				}
+
 
 			} while (opt != 9);
 
@@ -58,30 +70,30 @@ namespace EstructurasDatos2
 
 	internal class Queue
 	{
-		private NodeQueue first;
-		private NodeQueue last;
+		private NodeQueue First;
+		private NodeQueue Last;
 		private int count = 0;
 
 		public Queue()
 		{
-			this.first = null;
-			this.last = null;
+			this.First = null;
+			this.Last = null;
 		}
 
 		public void Enqueue(string _Name, decimal _Price)
 		{
 			NodeQueue node = new NodeQueue(_Name, _Price);
 
-			if (last != null)
+			if (Last != null)
 			{
-				last.Next = node;
+				Last.Next = node;
 			}
 
-			last = node;
+			Last = node;
 
-			if (first == null)
+			if (First == null)
 			{
-				first = node;
+				First = node;
 			}
 			count++;
 		}
@@ -94,13 +106,13 @@ namespace EstructurasDatos2
 				return null;
 			}
 
-			NodeQueue node = first;
+			NodeQueue node = First;
 
-			first = first.Next;
+			First = First.Next;
 
-			if (first == null)
+			if (First == null)
 			{
-				last = null;
+				Last = null;
 			}
 
 			count--;
@@ -110,7 +122,49 @@ namespace EstructurasDatos2
 
 		public bool isEmpty()
 		{
-			return first == null;
+			return First == null;
+		}
+
+		public void Print()
+		{
+			if (isEmpty())
+			{			
+				Console.WriteLine("Queue is empty");
+				return;
+			}
+
+			NodeQueue nodeQueue = First;
+
+			while (nodeQueue != null)
+			{
+				Console.WriteLine(nodeQueue.Name + " " + nodeQueue.Price);
+				nodeQueue = nodeQueue.Next;
+			}
+		}
+
+		public void Find(string _Name)
+		{
+			if (isEmpty())
+			{
+				Console.WriteLine("Stack is empty");
+				return;
+			}
+
+			NodeQueue node = First;
+
+			do
+			{
+				if (node.Name == _Name)
+				{
+					Console.WriteLine("Product is in the queue");
+					return;
+				}
+
+				node = node.Next;
+			}
+			while (node != null);
+
+			Console.WriteLine("Product is not in the queue");
 		}
 	}
 }

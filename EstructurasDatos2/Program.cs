@@ -19,6 +19,7 @@ namespace EstructurasDatos2
 				Console.WriteLine("What do you want to do?");
 				Console.WriteLine("1. Stack");
 				Console.WriteLine("2. Queue");
+				Console.WriteLine("3. Linked List");
 				Console.WriteLine("9. Exit"); ;			
 
 				do
@@ -36,6 +37,11 @@ namespace EstructurasDatos2
 				{
 					QueueFactory queueFactory = new QueueFactory();
 					queueFactory.Start();
+				}
+				if (opt == 3)
+				{
+					LinkedListFactory linkedListFactory = new LinkedListFactory();
+					linkedListFactory.Start();
 				}
 
 			} while(opt != 9);
