@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,7 +14,10 @@ namespace EstructurasDatos2
 		public void Start()
 		{
 			Stack stack = new Stack();
+			Stack reverseStack = new Stack();
+			StackP stackP = new StackP();
 			int opt;
+			string vopt = string.Empty;
 
 			do
 			{
@@ -21,8 +25,17 @@ namespace EstructurasDatos2
 				Console.WriteLine("1. Push");
 				Console.WriteLine("2. Find");
 				Console.WriteLine("3. Print");
-				Console.WriteLine("9. Exit"); ;
-				opt = Convert.ToInt16(Console.ReadLine());
+				Console.WriteLine("4. Pop");
+				Console.WriteLine("5. Push Person");
+				Console.WriteLine("6. Pop Person");
+				Console.WriteLine("7. Reverse");
+				Console.WriteLine("9. Exit");
+
+				do
+				{
+					Console.WriteLine("Please choose an option with a number");
+					vopt = Console.ReadLine();
+				} while (!int.TryParse(vopt, out opt));				
 
 				if (opt == 1)
 				{
@@ -44,7 +57,47 @@ namespace EstructurasDatos2
 				{
 					stack.Print();
 				}
+				if (opt == 4)
+				{
+					stack.Pop();
+				}
+				if (opt == 5)
+				{
+					Console.WriteLine("Name: ");
+					string name = Console.ReadLine();
+					Console.WriteLine("Last Name: ");
+					string lastName = Console.ReadLine();
 
+					stackP.Push(name, lastName);
+
+					stackP.Print();
+				}
+				if (opt == 6)
+				{
+					stackP.Pop();
+				}
+				if (opt == 7)
+				{
+					if (stack.IsEmpty())
+					{
+						Console.WriteLine("Stack is empty");
+						return;
+					}
+					
+					Node node = stack.Peek;
+
+					do
+					{
+						Node removedNode = stack.Pop();
+						reverseStack.Push(removedNode.Value);
+
+						node = node.Next;
+					}
+					while (node != null);
+
+					Console.WriteLine("Reversed Stack");
+					reverseStack.Print();
+				}
 
 			} while (opt != 9);
 
@@ -54,9 +107,9 @@ namespace EstructurasDatos2
 	internal class Stack
 	{
 		public Node Peek;
-		public int Count;
+		public int Count;		
 
-		public Stack() 
+		public Stack()
 		{
 			Peek = null;
 		}
@@ -77,12 +130,99 @@ namespace EstructurasDatos2
 				Console.WriteLine("Stack is empty");
 				return;
 			}
-			
+
 			Node node = Peek;
 
 			do
 			{
 				if (node.Value == Value)
+				{
+					Console.WriteLine("Value is in the stack");
+					return;
+				}
+
+				node = node.Next;
+			}
+			while (node != null);
+
+			Console.WriteLine("Value is not in the stack");
+		}
+
+		public Node Pop()
+		{
+			if (IsEmpty())
+			{
+				Console.WriteLine("Stack is empty");
+				return null;
+			}
+
+			Node node = Peek;
+			Peek = Peek.Next;
+
+			Count--;
+
+			Console.WriteLine(node.Value + " was removed");
+
+			return node;
+		}
+
+		public void Print()
+		{
+			if (IsEmpty())
+			{
+				Console.WriteLine("Stack is empty");
+				return;
+			}
+
+			Console.WriteLine("These are the elements in the stack:");
+			Node node = Peek;
+			Console.WriteLine(node.Value);
+
+			while (node.Next != null)
+			{
+				node = node.Next;
+				Console.WriteLine(node.Value);
+			}
+		}
+
+		public bool IsEmpty()
+		{
+			return Peek == null;
+		}
+	}
+
+	internal class StackP
+	{
+		public NodeP Peek;
+		public int Count;
+
+		public StackP()
+		{
+			Peek = null;
+		}
+
+		public void Push(string _Name, string _LastName)
+		{
+			NodeP newNode = new NodeP(_Name, _LastName);
+
+			newNode.Next = Peek;
+			Peek = newNode;
+			Count++;
+		}
+
+		public void Find(string _Name, string _LastName)
+		{
+			if (IsEmpty())
+			{
+				Console.WriteLine("Stack is empty");
+				return;
+			}
+
+			NodeP node = Peek;
+
+			do
+			{
+				if (node.Name == _Name && node.LastName == _LastName)
 				{
 					Console.WriteLine("Value is in the stack");
 					return;
@@ -103,12 +243,12 @@ namespace EstructurasDatos2
 				return;
 			}
 
-			Node node = Peek;
+			NodeP node = Peek;
 			Peek = Peek.Next;
 
 			Count--;
 
-			Console.WriteLine(node.Value + " was removed");
+			Console.WriteLine(node.Name + " " + node.LastName + " was removed");
 		}
 
 		public void Print()
@@ -120,13 +260,13 @@ namespace EstructurasDatos2
 			}
 
 			Console.WriteLine("These are the elements in the stack:");
-			Node node = Peek;
-			Console.WriteLine(node.Value);
+			NodeP node = Peek;
+			Console.WriteLine(node.Name + " " + node.LastName);
 
-			while(node.Next != null)
+			while (node.Next != null)
 			{
 				node = node.Next;
-				Console.WriteLine(node.Value);
+				Console.WriteLine(node.Name + " " + node.LastName);
 			}
 		}
 
