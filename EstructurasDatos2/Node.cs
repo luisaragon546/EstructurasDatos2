@@ -11,9 +11,9 @@ namespace EstructurasDatos2
 		public int Value;
 		public Node Next;
 
-		public Node(int _Value) 
-		{ 
-			this.Value = _Value;			
+		public Node(int _Value)
+		{
+			this.Value = _Value;
 		}
 	}
 
@@ -40,6 +40,20 @@ namespace EstructurasDatos2
 		{
 			this.Name = _Name;
 			this.Price = _Price;
+		}
+	}
+
+	internal class NodeDL
+	{
+		public string Brand;
+		public string Model;
+		public NodeDL Next;
+		public NodeDL Previous;		
+
+		public NodeDL(string _Brand, string _Model)
+		{
+			Brand = _Brand;
+			Model = _Model;	
 		}
 	}
 }

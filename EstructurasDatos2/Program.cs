@@ -20,6 +20,7 @@ namespace EstructurasDatos2
 				Console.WriteLine("1. Stack");
 				Console.WriteLine("2. Queue");
 				Console.WriteLine("3. Linked List");
+				Console.WriteLine("4. Doubly Linked List");
 				Console.WriteLine("9. Exit"); ;			
 
 				do
@@ -42,6 +43,11 @@ namespace EstructurasDatos2
 				{
 					LinkedListFactory linkedListFactory = new LinkedListFactory();
 					linkedListFactory.Start();
+				}
+				if (opt == 4)
+				{
+					DoublyLinkedListFactory doublyLinkedListFactory = new DoublyLinkedListFactory();
+					doublyLinkedListFactory.Start();
 				}
 
 			} while(opt != 9);
