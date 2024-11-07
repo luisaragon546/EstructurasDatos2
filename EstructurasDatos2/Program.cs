@@ -21,6 +21,7 @@ namespace EstructurasDatos2
 				Console.WriteLine("2. Queue");
 				Console.WriteLine("3. Linked List");
 				Console.WriteLine("4. Doubly Linked List");
+				Console.WriteLine("5. Binary Tree");
 				Console.WriteLine("9. Exit"); ;			
 
 				do
@@ -48,6 +49,11 @@ namespace EstructurasDatos2
 				{
 					DoublyLinkedListFactory doublyLinkedListFactory = new DoublyLinkedListFactory();
 					doublyLinkedListFactory.Start();
+				}
+				if (opt == 5)
+				{
+					StartBinaryTree binaryTree = new StartBinaryTree();
+					binaryTree.Start();
 				}
 
 			} while(opt != 9);

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryTree.cs" />
     <Compile Include="DoublyLinkedList.cs" />
     <Compile Include="LinkedList.cs" />
     <Compile Include="Node.cs" />

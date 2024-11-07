@@ -56,4 +56,18 @@ namespace EstructurasDatos2
 			Model = _Model;	
 		}
 	}
+
+	internal class TreeNode
+	{
+		public int Value;
+		public TreeNode Left;
+		public TreeNode Right;
+
+		public TreeNode(int _Value)
+		{
+			this.Value = _Value;
+			Left = null; 
+			Right = null;
+		}
+	}
 }
