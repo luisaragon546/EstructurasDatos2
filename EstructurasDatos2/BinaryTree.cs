@@ -23,6 +23,8 @@ namespace EstructurasDatos2
 				Console.WriteLine("4. Print");
 				Console.WriteLine("5. Are Equivalent?");
 				Console.WriteLine("6. Print InOrder");
+				Console.WriteLine("7. Print PreOrder");
+				Console.WriteLine("8. Print PostOrder");
 				Console.WriteLine("9. Exit");
 
 				do
@@ -95,10 +97,16 @@ namespace EstructurasDatos2
 						}
 						if (opt == 3)
 						{
-							Console.WriteLine("Value:");
-							int num2 = Convert.ToInt16(Console.ReadLine());
+							Console.WriteLine("Are 1 & 2 equivalent?");
 
-							binaryTree2.Add(num2);
+							if (binaryTree.AreEquivalent(binaryTree.root, binaryTree2.root))
+							{
+								Console.WriteLine("YES");
+							}
+							else
+							{
+								Console.WriteLine("NO");
+							}
 						}
 
 					} while (opt != 9);
@@ -113,6 +121,16 @@ namespace EstructurasDatos2
 				if (opt == 6)
 				{
 					binaryTree.PrintInOrder();										
+				}
+
+				if (opt == 7)
+				{
+					binaryTree.PrintPreOrder();
+				}
+
+				if (opt == 8)
+				{
+					binaryTree.PrintPostOrder();
 				}
 
 			} while (opt != 9);
@@ -183,6 +201,40 @@ namespace EstructurasDatos2
 			}
 		}
 
+		public void PrintPreOrder()
+		{
+			Console.WriteLine("PREORDER **********************************");
+			PrintPreOrderRecursive(root);
+			Console.WriteLine();
+		}
+
+		public void PrintPreOrderRecursive(TreeNode node)
+		{
+			if (node != null)
+			{
+				Console.WriteLine(node.Value + " ");
+				PrintPreOrderRecursive(node.Left);				
+				PrintPreOrderRecursive(node.Right);
+			}
+		}
+
+		public void PrintPostOrder()
+		{
+			Console.WriteLine("POSTORDER **********************************");
+			PrintPostOrderRecursive(root);
+			Console.WriteLine();
+		}
+
+		public void PrintPostOrderRecursive(TreeNode node)
+		{
+			if (node != null)
+			{				
+				PrintPostOrderRecursive(node.Left);
+				PrintPostOrderRecursive(node.Right);
+				Console.WriteLine(node.Value + " ");
+			}
+		}
+
 		public void AddRecursive(TreeNode parentNode, TreeNode childNode)
 		{
 			if (childNode.Value < parentNode.Value)
@@ -196,7 +248,7 @@ namespace EstructurasDatos2
 					AddRecursive(parentNode.Left, childNode);
 				}
 			}
-			else
+			else if (childNode.Value > parentNode.Value)
 			{
 				if (parentNode.Right == null)
 				{
@@ -246,6 +298,26 @@ namespace EstructurasDatos2
 
 			DrawBinaryTree2(node.Left, indent, false);
 			DrawBinaryTree2(node.Right, indent, true);
+		}
+
+		public bool AreEquivalent(TreeNode node1, TreeNode node2)
+		{
+			if (node1 == null && node2 == null)
+			{
+				return true;
+			}
+
+			if (node1 == null || node2 == null)
+			{
+				return false;
+			}
+
+			if (node1.Value != node2.Value)
+			{
+				return false;
+			}
+			
+			return AreEquivalent(node1.Left, node2.Left) && AreEquivalent(node1.Right, node2.Right);
 		}
 	}
 }
