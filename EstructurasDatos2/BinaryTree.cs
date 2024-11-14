@@ -13,6 +13,7 @@ namespace EstructurasDatos2
 			int opt;
 			string vopt = string.Empty;
 			BinaryTree binaryTree = new BinaryTree();
+			BinaryTree binaryTree2 = new BinaryTree();
 
 			do
 			{
@@ -20,6 +21,8 @@ namespace EstructurasDatos2
 				Console.WriteLine("1. Add");
 				Console.WriteLine("2. Search");
 				Console.WriteLine("4. Print");
+				Console.WriteLine("5. Are Equivalent?");
+				Console.WriteLine("6. Print InOrder");
 				Console.WriteLine("9. Exit");
 
 				do
@@ -58,6 +61,58 @@ namespace EstructurasDatos2
 					binaryTree.DrawBinaryTree(binaryTree.root);
 					Console.WriteLine("******************************************");
 					binaryTree.DrawBinaryTree2(binaryTree.root);
+				}
+
+				if (opt == 5)
+				{
+					do
+					{
+						Console.WriteLine("Select the tree?");
+						Console.WriteLine("1. Tree 1");
+						Console.WriteLine("2. Tree 2");
+						Console.WriteLine("3. Are 1 & 2 equivalent?");
+						Console.WriteLine("9. Exit"); ;
+
+						do
+						{
+							Console.WriteLine("Please choose an option with a number");
+							vopt = Console.ReadLine();
+						} while (!int.TryParse(vopt, out opt));
+
+						if (opt == 1)
+						{
+							Console.WriteLine("Value:");
+							int num1 = Convert.ToInt16(Console.ReadLine());
+
+							binaryTree.Add(num1);
+						}
+						if (opt == 2)
+						{
+							Console.WriteLine("Value:");
+							int num2 = Convert.ToInt16(Console.ReadLine());
+
+							binaryTree2.Add(num2);
+						}
+						if (opt == 3)
+						{
+							Console.WriteLine("Value:");
+							int num2 = Convert.ToInt16(Console.ReadLine());
+
+							binaryTree2.Add(num2);
+						}
+
+					} while (opt != 9);
+
+					Console.WriteLine("Tree 1 *****************************************");
+					binaryTree.DrawBinaryTree2(binaryTree.root);
+					Console.WriteLine("Tree 2 *****************************************");
+					binaryTree2.DrawBinaryTree2(binaryTree2.root);
+					opt = 0;
+				}
+
+				if (opt == 6)
+				{
+					binaryTree.PrintInOrder();										
 				}
 
 			} while (opt != 9);
@@ -108,6 +163,23 @@ namespace EstructurasDatos2
 			else
 			{
 				return SearchRecursive(parent.Right, value);
+			}
+		}
+
+		public void PrintInOrder()
+		{
+			Console.WriteLine("INORDER **********************************");
+			PrintInOrderRecursive(root);
+			Console.WriteLine();
+		}
+
+		public void PrintInOrderRecursive(TreeNode node)
+		{
+			if(node != null)
+			{
+				PrintInOrderRecursive(node.Left);
+				Console.WriteLine(node.Value + " ");
+				PrintInOrderRecursive(node.Right);
 			}
 		}
 
