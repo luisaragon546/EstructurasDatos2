@@ -70,4 +70,16 @@ namespace EstructurasDatos2
 			Right = null;
 		}
 	}
+
+	internal class GraphNode
+	{
+		public int Value;
+		public List<GraphNode> Adjacents;		
+
+		public GraphNode(int _Value)
+		{
+			this.Value = _Value;
+			this.Adjacents = new List<GraphNode>();
+		}
+	}
 }

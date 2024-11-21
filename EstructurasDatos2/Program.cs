@@ -22,6 +22,7 @@ namespace EstructurasDatos2
 				Console.WriteLine("3. Linked List");
 				Console.WriteLine("4. Doubly Linked List");
 				Console.WriteLine("5. Binary Tree");
+				Console.WriteLine("6. Graphs");
 				Console.WriteLine("9. Exit"); ;			
 
 				do
@@ -54,6 +55,11 @@ namespace EstructurasDatos2
 				{
 					StartBinaryTree binaryTree = new StartBinaryTree();
 					binaryTree.Start();
+				}
+				if (opt == 6)
+				{
+					StartGraph graph = new StartGraph();
+					graph.Start();
 				}
 
 			} while(opt != 9);
